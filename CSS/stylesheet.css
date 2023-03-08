@@ -1,3 +1,76 @@
 /* Cascade Style Sheet for this website */
 
-/* comment for test*/
+body {
+    
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+/*Main text styling*/
+div.main_content {
+    text-align: left;
+    padding: 10px;
+}
+
+div.main_content h1 {
+    font-size: 40px;
+}
+
+div.main_content p {
+    font-size: 12px;
+    background-color: white;
+    color: darkgrey;
+}
+
+div.main_content ul li {
+    font-size: 12px;
+    background-color: white;
+    color: darkgrey;
+}
+
+/*Nav bar styles*/
+#nav_bar {
+    text-align: center;
+}
+
+#nav_bar ul{
+    list-style-type: none;
+    display: inline-table;
+    margin: 0;
+    padding: 0;
+}
+
+#nav_bar li {
+    float: left;
+    padding: 5px;
+    
+}
+
+#nav_bar a {
+    text-decoration: none;
+    outline-style: groove;
+    padding: 5px;
+    background-color: blue;
+    color: white;
+
+}
+
+/*Form styling*/
+
+form.form_contact input {
+    width: 400px;
+}
+
+div.form_item {
+    padding: 5px;
+}
+
+/*Footer styling*/
+footer {
+    background-color: black;
+    color: white;
+    text-align: right;
+    font-size: 10px;
+}

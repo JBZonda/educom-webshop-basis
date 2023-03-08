@@ -3,29 +3,40 @@
 
 <head>
     <title>Contact</title>
+    <link rel="stylesheet" href="CSS/stylesheet.css">
 </head>
 
 <body class="standard_body">
-    <ul class="nav_bar">
-        <li> <a href="\educom-webshop-basis/index.html">Home</a>  </li>
-        <li> <a href="\educom-webshop-basis/about.html">About</a></li>
-        <li> <a href="\educom-webshop-basis/contact.html">Contact</a></li>
-    </ul>
-    
+    <div id="nav_bar">
+        <ul>
+            <li> <a href="\educom-webshop-basis/index.html">Home</a>  </li>
+            <li> <a href="\educom-webshop-basis/about.html">About</a></li>
+            <li> <a href="\educom-webshop-basis/contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="contact_form">
     <form class="form_contact">
-        <label for="">Aanhef</label><br>
+        <div class="form_item">
+        <label for="">Aanhef</label>
         <select id="" name="">
             <option value="Dhr.">Dhr.</option>
             <option value="Mvr.">Mvr.</option>
             <option value="...">...</option>
         </select><br>
-        <label for="name">Naam</label><br>
+        </div>
+        <div class="form_item">
+        <label for="name">Naam</label>
         <input type="text" ïd="name" name="name"><br>
-        <label for="email">email</label><br>
+        </div>
+        <div class="form_item">
+        <label for="email">Email</label>
         <input type="email" ïd="email" name="email"><br>
-        <label for="phone_number">telefoonnumer</label><br>
+        </div>
+        <div class="form_item">
+        <label for="phone_number">Telefoonnumer</label>
         <input type="text" ïd="phone_number" name="phone_number"><br>
-        
+        </div>
         <p>Selecteer communicatievoorkeur:</p>
         <input type="radio" id="cm_email" value="Email">
         <label for="">Email</label><br>
@@ -34,7 +45,7 @@
 
         <input type="submit" value="Submit">
     </form>
-    
+    </div>
 
 </body>
 
