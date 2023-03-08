@@ -68,6 +68,11 @@ div.form_item {
     padding: 5px;
 }
 
+#comment {
+    width: 400px;
+    resize: none;
+}
+
 /*Footer styling*/
 footer {
     background-color: black;
