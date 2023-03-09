@@ -1,6 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+
+function test_input($variable_name) {
+
+    if (empty($_POST[$variable_name])){
+        $emty_error = "is verplicht";
+        global $errors;
+        $errors[$variable_name] = $emty_error;
+        return "";
+    } else {
+        $data = $_POST[$variable_name];
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+    }
+    
+    
+    
+
+    return $data;
+  }
+# make variables and their errors in an array
+$address = $name = $email = $phone_number = $comment = $com_pref= "";
+$errors = array("address" =>"","name" =>"", "email"=>"", "phone_number" =>"", "comment" =>"", "com_pref" =>"");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    foreach($_POST as $key => $value) {
+        echo $key . " content " . $value;
+    }
+    
+    $address = test_input("address");
+    $name = test_input("name");
+    $email = test_input("email");
+    $phone_number = test_input("phone_number");
+    $comment = test_input("comment");
+    $com_pref = test_input("com_pref");
+    echo "errors:";
+    foreach($errors as $key => $error) {
+        echo $key . " content " . $error;
+    }
+    
+}
+
+
+?>
+
+
 <head>
     <title>Contact</title>
     <link rel="stylesheet" href="CSS/stylesheet.css">
@@ -56,27 +103,6 @@
     <p>&copy;2023 Author: Jeroen van der Borgh</p>
 </footer>
 
-<?php
 
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-$address = $name = $email = $phone_number = $comment = $com_pref= "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $address = test_input($_POST["address"]);
-  $name = test_input($_POST["name"]);
-  $email = test_input($_POST["email"]);
-  $phone_number = test_input($_POST["phone_number"]);
-  $comment = test_input($_POST["comment"]);
-  $com_pref = test_input($_POST["com_pref"]);
-  
-}
-
-
-?>
 
 </html>
