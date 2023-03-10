@@ -73,6 +73,16 @@ div.form_item {
     resize: none;
 }
 
+.error {
+    color: red;
+}
+
+/*Form thanks stryling*/
+
+.thanks_message p {
+    background-color: lightblue;
+}
+
 /*Footer styling*/
 footer {
     background-color: black;
