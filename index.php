@@ -60,13 +60,56 @@ function showBodyEnd(){
     echo "</body>";
 }
 
-function getResponsePage($page){
+function showResponsePage($page){
     showHTMLstart();
     showHeadSection();
     showBodySection($page);
     showHTMLend();
 }
 
+function getRequestedPage(){
+    # make variables and their errors in an array
+    global $errors;
+    global $name;
+    global $email;
+    global $phone_number;
+    global $comment;
+    global $address;
+    global $thanks;
+    global $errors;
+    global $com_pref;
+    $address = $name = $email = $phone_number = $comment = $com_pref= "";
+    $errors = array("address" =>"","name" =>"", "email"=>"", "phone_number" =>"", "comment" =>"", "com_pref" =>"");
+    $valid = False;
+    $thanks = False;
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+        $address = clean_and_check_input("address");
+        $name = clean_and_check_input("name");
+        $email = clean_and_check_input("email");
+        $phone_number = clean_and_check_input("phone_number");
+        $comment = clean_and_check_input("comment");
+        $com_pref = clean_and_check_input("com_pref");
+        
+        $valid = True;
+        foreach($errors as $key => $error) {
+            if ($error != ""){
+                $valid = False;
+                break;
+            }
+        }
+        
+        if ($valid) {
+            $thanks = True;
+            return "contact";
+        } else {
+            return "contact";
+        }
+
+    } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
+        return $_GET["page"];
+    }
+}
 
 function clean_and_check_input($variable_name) {
     # give errors to the missing variables
@@ -97,43 +140,7 @@ function validate_specific_response($variable_name, $data) {
     return $data;
 }
 
-
-# make variables and their errors in an array
-$address = $name = $email = $phone_number = $comment = $com_pref= "";
-$errors = array("address" =>"","name" =>"", "email"=>"", "phone_number" =>"", "comment" =>"", "com_pref" =>"");
-$valid = False;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $address = clean_and_check_input("address");
-    $name = clean_and_check_input("name");
-    $email = clean_and_check_input("email");
-    $phone_number = clean_and_check_input("phone_number");
-    $comment = clean_and_check_input("comment");
-    $com_pref = clean_and_check_input("com_pref");
-    
-    $valid = True;
-    foreach($errors as $key => $error) {
-        if ($error != ""){
-            $valid = False;
-            break;
-        }
-    }
-    
-    if ($valid) {
-        echo '<div class="thanks_message">
-        <p>Bedankt</p>
-        <p>'. $address . " " . $name .'</p>
-        <p>Email:' .  $email . '</p>
-        <p>Telefoonnummer:'.$phone_number. '</p>
-        <p>Bericht: <br>
-        $comment </p>
-        <p>Communicatievoorkeur:' . $com_pref .'.</div>';
-    } else {
-        getResponsePage("contact");
-    }
-
-} elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
-    getResponsePage($_GET["page"]);
-}
+$page = getRequestedPage();
+showResponsePage($page)
 
 ?>
