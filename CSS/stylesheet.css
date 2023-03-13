@@ -80,7 +80,7 @@ div.form_item {
 /*Form thanks stryling*/
 
 .thanks_message p {
-    background-color: lightblue;
+    font-size: 15px;
 }
 
 /*Footer styling*/
