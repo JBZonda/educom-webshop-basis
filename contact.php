@@ -66,6 +66,7 @@ if ($thanks) {
         echo '>
         <label for="">Telefoon</label>
         <br><br>
+        <input type="hidden" name="form_name" value="contact">
         <input type="submit" value="Submit">
         </form>';
 

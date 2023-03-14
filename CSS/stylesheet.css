@@ -57,7 +57,13 @@ div.main_content ul li {
     color: white;
 
 }
-
+#nav_bar button {
+    text-decoration: none;
+    outline-style: groove;
+    padding: 5px;
+    background-color: blue;
+    color: white;
+}
 /*Form styling*/
 
 form.form_contact input {
