@@ -20,7 +20,7 @@ echo '<div class="register-login">
 <label for="name">Herhaal wachtwoord:</label><br>
 <input type="password" id="name" name="password_re" ><br>
 
-<input type="hidden" name="form_name" value="register">
+<input type="hidden" name="form_name" value="register"><br>
 <input type="submit" value="Submit">
 </form>
 </div>

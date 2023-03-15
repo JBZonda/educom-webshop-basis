@@ -15,7 +15,7 @@ echo '<div class="register-login">
 <input type="password" id="name" name="password" value="'. $password . '">
 <span class="error">' . $errors["password"] . '</span><br>
 
-<input type="hidden" name="form_name" value="login">
+<input type="hidden" name="form_name" value="login"><br>
 <input type="submit" value="Submit">
 </form>
 </div>
