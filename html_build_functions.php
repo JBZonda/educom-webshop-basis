@@ -32,17 +32,16 @@ function showNavbar(){
         <li> <a href="\educom-webshop-basis/index.php?page=login">Login</a></li>';
     } else {
         echo
-        '<li><form method="post" action="\educom-webshop-basis/index.php">
-        <input type="hidden" name="form_name" value="logout">
-        <button type="submit" formmethod="post">Loguit: '.$_SESSION["user_name"] .'</button>
-        </form></li>';
+        '<li><a href="\educom-webshop-basis/index.php?page=logout">Loguit</a></li>';
     }
     echo '</ul>
     </div>';
 }
-function showcontent($page){
-    if (file_exists($page . ".php"))
+function showcontent($data){
+    $page = $data["page"];
+    if (file_exists( $page . ".php")){
         include $page . ".php";
+    }
     else {
         echo "<h1> deze pagina bestaat niet </h1>";
     }
@@ -58,18 +57,27 @@ function showBodyEnd(){
     echo "</body>";
 }
 
-function showBodySection($page){
+function get_variable($data, $key, $key_array_in_array=NULL){
+    if ($key_array_in_array != NULL){
+        $value = isset($data[$key][$key_array_in_array]) ? $data[$key][$key_array_in_array] : "";
+    } else {
+        $value = isset($data[$key]) ? $data[$key] : "";
+    }
+    return $value;
+}
+
+function showBodySection($data){
     showBodyStart();
     showNavbar();
-    showcontent($page);
+    showcontent($data);
     showFooter();
     showBodyEnd();
 }
 
-function showResponsePage($page){
+function showResponsePage($data){
     showHTMLstart();
     showHeadSection();
-    showBodySection($page);
+    showBodySection($data);
     showHTMLend();
 }
 ?>

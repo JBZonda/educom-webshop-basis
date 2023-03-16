@@ -58,7 +58,10 @@ div.main_content ul li {
 
 }
 #nav_bar button {
+    position: relative;
+    bottom: 5px;
     text-decoration: none;
+    border: none;
     outline-style: groove;
     padding: 5px;
     background-color: blue;
