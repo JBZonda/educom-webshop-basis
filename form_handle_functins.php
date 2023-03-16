@@ -82,6 +82,7 @@ function handle_form_register(){
 }
 
 function handle_form_login(){
+    echo "in handle";
     global $email;
     global $errors;
     global $password;
@@ -93,7 +94,7 @@ function handle_form_login(){
         fgets($login_file);
         while(!feof($login_file)) {
         $line = fgets($login_file);
-        $line = rtrim($line,"\n");
+        $line = rtrim($line,"\r\n");
         $line_seperated = explode("|",$line);
             if ($email == $line_seperated[0]){
                 if ($password == $line_seperated[2]){
@@ -113,7 +114,7 @@ function handle_form_login(){
         }
         fclose($login_file);
 
-    
+    print_r($errors);
     if (error_check()) {
         return "home";
     } else {

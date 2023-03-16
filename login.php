@@ -9,11 +9,11 @@ echo '<div class="register-login">
 
 <label for="email">Email:</label><br>
 <input type="email" id="email" name="email" value="'. $email . '">
-<span class="error">' . $errors["email"] . '</span><br>
+<span class="error">' . $errors["login"] . '</span><br>
 
 <label for="name">Wachtwoord:</label><br>
 <input type="password" id="name" name="password" value="'. $password . '">
-<span class="error">' . $errors["password"] . '</span><br>
+<span class="error">' . $errors["login"] . '</span><br>
 
 <input type="hidden" name="form_name" value="login"><br>
 <input type="submit" value="Submit">
