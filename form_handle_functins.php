@@ -43,28 +43,6 @@ function handle_form_contact($data){
     
 }
 
-function does_email_exist($email){
-    #check if email is already in use
-    $login_file = fopen("data_text_files/logins.txt","r");
-    fgets($login_file);
-    while(!feof($login_file)) {
-        $line = fgets($login_file);
-        $line_seperated = explode("|",$line);
-        if ($email == $line_seperated[0]){
-            fclose($login_file);
-            return TRUE;
-        }  
-    }
-    fclose($login_file);
-    return FALSE;
-}
-
-function save_user($email,$name,$password){
-    $login_file = fopen("data_text_files/logins.txt","a");
-    fwrite($login_file,implode("|",array("\n" . $email, $name, $password)));
-    fclose($login_file);
-}
-
 function handle_form_register($data){
     $fields = array("name","email", "password", "password_re");
     $data = validate_input_fields($fields, $data);
@@ -74,10 +52,12 @@ function handle_form_register($data){
     if (is_valid($data)) {
         if (!does_email_exist($data["email"])){
             save_user($data["email"],$data["name"],$data["password"]);
+            $data["page"] = "login";
         } else {
             $data["errors"]["email"] = "Email is al in gebruik.";
+            $data["page"] = "register";
         }
-        $data["page"] = "login";
+        
         return $data;
     } else {
         return $data;
@@ -85,52 +65,29 @@ function handle_form_register($data){
 }
 
 function handle_form_login($data){
-    echo "in handle";
-    global $email;
-    global $errors;
-    global $password;
-    $email = validate_specific_response("email", clean_and_check_input("email"));
-    $password = validate_specific_response("password", clean_and_check_input("password"));
-    
+    $fields = array("email", "password");
+    $data = validate_input_fields($fields, $data);
+
     #check the login data, and login if correct
-    $login_file = fopen("data_text_files/logins.txt","r");
-        fgets($login_file);
-        while(!feof($login_file)) {
-        $line = fgets($login_file);
-        $line = rtrim($line,"\r\n");
-        $line_seperated = explode("|",$line);
-            if ($email == $line_seperated[0]){
-                if ($password == $line_seperated[2]){
-                    #login
-                    $_SESSION["user_name"] = $line_seperated[1];
-                    $_SESSION["user_email"] = $line_seperated[0];
-                    break;
-                }
-                #password is not correct
-                $errors["login"] = "incorrecte login";
-                break;
-            }
-        }
-        #email is not registered
-        if (feof($login_file)){
-            $errors["login"] = "incorrecte login";
-        }
-        fclose($login_file);
 
-    if (is_valid()) {
-        return "home";
+    if (does_email_exist($data["email"])){
+        $user_data = get_user_data_from_email($data["email"]);
+        if ($data["password"] == $user_data["password"]){
+            login_user($user_data["email"],$user_data["name"]);
+        } else {
+            $data["errors"]["login"] = "Login is incorrect.";
+        }
     } else {
-        return "login";
+        $data["errors"]["login"] = "Login is incorrect.";
     }
-}
 
-#loguit a user by reseting the session variable
-function logout_user($data){
-    session_unset();
-    $_SESSION["user_name"] = NULL;
-    $_SESSION["user_email"] = NULL;
-    $data["page"] = "home";
-    return $data;
+    if (is_valid($data)) {
+        $data["page"] = "home";
+        return $data;
+    } else {
+        $data["page"] = "login";
+        return $data;
+    }
 }
 
 function clean_and_check_input($variable_name, $data) {

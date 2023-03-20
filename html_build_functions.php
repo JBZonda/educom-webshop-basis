@@ -19,7 +19,7 @@ function showBodyStart(){
 
 }
 
-function showNavbar(){
+function showNavbar($data){
     echo '<div id="nav_bar">
     <ul>
         <li> <a href="\educom-webshop-basis/index.php?page=home">Home</a></li>
@@ -32,7 +32,7 @@ function showNavbar(){
         <li> <a href="\educom-webshop-basis/index.php?page=login">Login</a></li>';
     } else {
         echo
-        '<li><a href="\educom-webshop-basis/index.php?page=logout">Loguit</a></li>';
+        '<li><a href="\educom-webshop-basis/index.php?page=logout">Loguit '; echo $_SESSION["user_name"]; echo'</a></li>';
     }
     echo '</ul>
     </div>';
@@ -68,7 +68,7 @@ function get_variable($data, $key, $key_array_in_array=NULL){
 
 function showBodySection($data){
     showBodyStart();
-    showNavbar();
+    showNavbar($data);
     showcontent($data);
     showFooter();
     showBodyEnd();
